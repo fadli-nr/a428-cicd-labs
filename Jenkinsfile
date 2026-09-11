@@ -1,22 +1,21 @@
 pipeline {
     agent {
         docker {
-            image 'node:16-buster-slim'
-            args '-p 3000:3000'
+            image 'node:16-buster-slim' 
+            args '-p 3000:3000' 
         }
     }
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
-                // Pasang seluruh dependensi dari package.json
+                // Pasang semua paket dan pastikan react-scripts terpasang
                 sh 'npm install'
-                // Opsional: pasang cross-env & react-scripts secara manual jika hilang
-                sh 'npm install --save-dev cross-env react-scripts'
+                sh 'npm install react-scripts'
             }
         }
-        stage('Test') {
+        stage('Test') { 
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh './jenkins/scripts/test.sh' 
             }
         }
     }
